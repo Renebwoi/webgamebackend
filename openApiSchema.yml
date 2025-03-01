@@ -1,0 +1,183 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Persons API
+paths:
+  /persons:
+    get:
+      summary: Get all persons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+    post:
+      summary: Create a new person
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+  /persons/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a person by ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '404':
+          description: Person not found
+    put:
+      summary: Update a person by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '404':
+          description: Person not found
+    delete:
+      summary: Delete a person by ID
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Person not found
+  /wins:
+    get:
+      summary: Get all wins
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Win'
+    post:
+      summary: Create a new win
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Win'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Win'
+  /wins/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a win by ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Win'
+        '404':
+          description: Win not found
+    put:
+      summary: Update a win by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Win'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Win'
+        '404':
+          description: Win not found
+    delete:
+      summary: Delete a win by ID
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Win not found
+  /wins/person/{personId}:
+    parameters:
+      - name: personId
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get all wins by personId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Win'
+        '404':
+          description: Wins not found
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        userName:
+          type: string
+    Win:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        personId:
+          type: integer
+        winDate:
+          type: string
